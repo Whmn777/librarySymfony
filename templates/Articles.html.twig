@@ -1,10 +1,14 @@
 {% extends "base.html.twig" %}
+{#  Grâce à extends je fais relier mon fichier article.html.twig à bas.html.twig #}
+
 
 {% block title %}Mes Articles{% endblock %}
 
 {% block main %}
 
-    {#  J'ouvre une instruction for avec une acollade et % #}
+{#  J'ouvre une instruction for avec une acollade et % #}
+{# Pour chaque article de mon tableau contenant tous les articles possibles #}
+
 {% for article in articles %}
 
 

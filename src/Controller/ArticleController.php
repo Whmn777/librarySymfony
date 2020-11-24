@@ -5,7 +5,6 @@ namespace App\Controller;
 
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 use App\Repository\ArticleRepository;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -29,7 +28,12 @@ class ArticleController extends AbstractController
 
         $articles = $articleRepository->findAll();
 
-        return $this->render('Articles.html.twig', [
+        //Je retourne grâce à la méthode render de la classe Abstracontroller dont j'ai fait hériter
+        //la class ArticleController.
+        //je mets en paramètres de la méthode render, le nom du fichier article.html.twig et d'un tableau
+        //ayant pour variable 'articles' le nom de ma variable dans twig et $articles sa valeur dans ma BDD
+
+        return $this->render('articles.html.twig', [
             'articles' => $articles
         ]);
 ;
@@ -48,7 +52,7 @@ class ArticleController extends AbstractController
     {
         //Je récupère tous mes articles dans ma BBD
         // en utilisant la méthode publique articleShow et le mécanisme d'autowire de SF
-        // ayant pour paramètre la classe Articlerepository et la variable $articleRepository
+        // ayant pour paramètre la class ArticleRepository et la variable $articleRepository
         // Grâce à la méthode find de la classe ArticleRepository,
         //J'envoie une requête SELECT ..WHERE...pour récuperer l'id de l'article à faire afficher.
 
@@ -57,10 +61,10 @@ class ArticleController extends AbstractController
 
         //Je retourne grâce à la méthode render de la classe Abstracontroller dont j'ai fait hériter
         //la class ArticleController.
-        //je mets en paramètres de la méthode render, le nom du fichier Article.html.twig et d'un tableau
-        //ayant
+        //je mets en paramètres de la méthode render, le nom du fichier article.html.twig et d'un tableau
+        //ayant pour variable 'article' le nom de ma variable dans twig et $article sa valeur dans ma BDD.
 
-       return $this->render('Article.html.twig', [
+       return $this->render('article.html.twig', [
             'article' => $article
         ]);
 

@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="167d8530-8905-42fa-ac4a-68b2281b3a6e" name="Default Changelist" comment="" />
+    <list default="true" id="167d8530-8905-42fa-ac4a-68b2281b3a6e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ArticleController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/Article.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Article.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/Articles.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Articles.html.twig" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -140,7 +148,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1606211863995</updated>
-      <workItem from="1606211865189" duration="13916000" />
+      <workItem from="1606211865189" duration="17827000" />
+      <workItem from="1606238895575" duration="3525000" />
     </task>
     <servers />
   </component>
@@ -152,9 +161,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="464" y="259" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1606212836007" />
-    <state x="443" y="194" key="NewPhpClassDialog" timestamp="1606220011965">
-      <screen x="0" y="23" width="1440" height="877" />
+    <state x="443" y="175" key="NewPhpClassDialog" timestamp="1606235705556">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
+    <state x="443" y="175" key="NewPhpClassDialog/0.0.1440.900@0.0.1440.900" timestamp="1606235705556" />
     <state x="443" y="194" key="NewPhpClassDialog/0.23.1440.877@0.23.1440.877" timestamp="1606220011965" />
   </component>
 </project>

@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+{#  Grâce à extends je fais relier mon fichier article.html.twig à bas.html.twig #}
+
+
+{% block title %} Mes Catégories {% endblock %}
+
+
+{% block main %}
+
+    {#  J'ouvre une instruction for avec une acollade et % #}
+    {# Pour chaque catégorie de mon tableau contenant toutes les catégories possibles #}
+
+    {% for categorie in categories %}
+
+
+        {#J'affiche chaque catégorie grâce à la variable categories.title#}
+        {# J'attribue la class style à ma balise h1, et lui donne la valeur categories.color #}
+
+        <h1 style="color:{{ categorie.color }}">{{ categorie.title }}</h1>
+
+
+
+    {% endfor %}
+    {# Je referme mon instruction avec endfor #}
+
+{% endblock main %}
+{# Je referme mon block main avec endblock #}
