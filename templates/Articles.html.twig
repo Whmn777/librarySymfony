@@ -2,25 +2,32 @@
 
 {% block title %}Mes Articles{% endblock %}
 
-
 {% block main %}
+
+    {#  J'ouvre une instruction for avec une acollade et % #}
 {% for article in articles %}
 
 
 
-
+    {# J'insère une image de chaque article depuis ma base de données grâce à la variable article.image #}
 
     <img src="{{ article.image }}" alt="Image" class="resp"/>
 
-    <p>{{ article.title }} {{ article.content }}  </p>
+    {#Grâce à la balise (a) je crée un lien cliquable sur le titre de chaque article#}
+     {#Avec path, j'indique le name de la route à emprunter, et la valeur de la wild card de la route #}
+    {# l'id qui a pour valeur article.id #}
+    <h1>
+        <a href="{{ path('article_show',{'id':article.id}) }}"> {{ article.title }}  </a>
+    </h1>
+
 
 
 
 {% endfor %}
+{# Je referme mon instruction avec endfor #}
 
 {% endblock main %}
-
-
+{# Je referme mon block main avec endblock #}
 
 
 

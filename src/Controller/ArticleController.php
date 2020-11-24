@@ -34,4 +34,37 @@ class ArticleController extends AbstractController
         ]);
 ;
     }
+
+    //Je crée une nouvelle route pour accéder à la page de chaque article, en utilisant la wilde card {id}
+    /**
+     * @Route("/article/{id}", name="article_show")
+     */
+
+    //Je crée une méthode publique articleShow ayant pour paramètres, la valeur de la wilde card {id}
+    // l'injection de dépendances (class) ou encore l'autowire ayant pour classe ArticleRepository
+    // et pour valeur $articleRepository
+
+    public function articleShow($id,ArticleRepository $articleRepository)
+    {
+        //Je récupère tous mes articles dans ma BBD
+        // en utilisant la méthode publique articleShow et le mécanisme d'autowire de SF
+        // ayant pour paramètre la classe Articlerepository et la variable $articleRepository
+        // Grâce à la méthode find de la classe ArticleRepository,
+        //J'envoie une requête SELECT ..WHERE...pour récuperer l'id de l'article à faire afficher.
+
+
+        $article = $articleRepository->find($id);
+
+        //Je retourne grâce à la méthode render de la classe Abstracontroller dont j'ai fait hériter
+        //la class ArticleController.
+        //je mets en paramètres de la méthode render, le nom du fichier Article.html.twig et d'un tableau
+        //ayant
+
+       return $this->render('Article.html.twig', [
+            'article' => $article
+        ]);
+
+    }
+
+
 }
