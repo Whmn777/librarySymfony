@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Mes Articles{% endblock %}
+
+
+{% block main %}
+{% for article in articles %}
+
+
+
+
+
+    <img src="{{ article.image }}" alt="Image" class="resp"/>
+
+    <p>{{ article.title }} {{ article.content }}  </p>
+
+
+
+{% endfor %}
+
+{% endblock main %}
+
+
+
+
+
+
+
+
+
