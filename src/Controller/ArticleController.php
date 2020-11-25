@@ -78,7 +78,7 @@ class ArticleController extends AbstractController
      */
 
 
-    //Je créee une méthode publique inserStaticArticle ayant en paramètre la classe EntityManagerInterface qui
+    //Je créee une méthode publique insertStaticArticle ayant en paramètre la classe EntityManagerInterface qui
     // va me permettre de réaliser des requêtes INSERT, UPDATE et DELETE dans ma BDD. Je rajoute la variable
     //$entityManager
 
@@ -111,9 +111,56 @@ class ArticleController extends AbstractController
 
         $entityManager->flush();
 
-        //
+        //Je fais un return de ma méthode publique insertStaticArticle en affichant une réponse http sur mon navigateur.
+        //Pour cela j'utlise la méthode render de la classe Abstracontroller dont j'ai fait hériter
+        //la class ArticleController:
+        //je mets en paramètres de la méthode render, le nom du fichier insert.html.twig
 
         return $this->render('insert_static.html.twig');
+
+    }
+
+    /**
+     * Je crée une nouvelle route pour modifier le titre de mes articles à partir de données statiques que j'ai
+     * instanciées dans mon Controller. Pour cela j'ajoute une wildcard id afin de selectionner l'article correspond
+     * à modifier.
+     *
+     * @Route("/article/update-static/{id}", name="article_modify_static")
+     */
+
+    //Je créee une méthode publique updateStaticArticle pour :
+    // - récuperer chaque article à modifier grâce à la class ArticleRepository, et à l'id,
+    // - enregistrer mes modifications grâce à la class EntityManagerInterface et
+    // à la variable $entityManager qui va contenir mes modifications.
+
+
+    public function updateStaticArticle($id, $articleRepository, EntityManagerInterface $entityManager)
+    {
+        //Je récupère l'article à modifier de ma BDD, en l'instanciant dans ma variable $article, grâce à la
+        // class ArticleRepository. J'utilise la variable $articleRepository, et la méthode find() pour selectionner
+        //l'id de l'article recherché.
+
+        $article = $articleRepository->find($id);
+
+        //Grâce au setteur, je modifie la propriété Title de mon entité $article. Cela correspond à la modification
+        //de mes champs et enregistrements de ma table article de ma BDD.
+
+        $article->setTitle("Mon nouveau Titre");
+
+        //Avec la class EntityManagerInterface, j'effectue les modifications sur ma table articles avec :
+
+        //la méthode persist, qui crée une entrée dans ma table,
+
+        $entityManager->persist($article);
+
+        //et la méthode flush(), qui injecte les données et les enregistrent dans ma table article.
+
+        $entityManager->flush();
+
+        //Je retourne ma fonction updateStaticArticle, avec la méthode render, afin de pouvoir l'afficher
+        // sur mon navigateur.
+
+        return $this->render("update_static.html.twig");
 
     }
 }

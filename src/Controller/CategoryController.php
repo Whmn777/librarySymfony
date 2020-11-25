@@ -64,8 +64,7 @@ class CategoryController extends AbstractController
         //J'utilise des setteurs pour modifier les proriétés de ma class entité Category.
 
         $categorie->setTitle("Langage de programmation");
-        $categorie->setColor("J'utilise ma fonction insertArticle, avec pour paramètres la class EntityManagerInterface
-          et la variable entityManager");
+        $categorie->setColor("green");
         $categorie->setCreationDate(new \DateTime());
         $categorie->setPublicationDate(new \DateTime());
         $categorie->setIsPublished(true);

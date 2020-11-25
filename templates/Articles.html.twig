@@ -20,8 +20,18 @@
     {#Grâce à la balise (a) je crée un lien cliquable sur le titre de chaque article#}
      {#Avec path, j'indique le name de la route à emprunter, et la valeur de la wild card de la route #}
     {# l'id qui a pour valeur article.id #}
-    <h1>
-        <a href="{{ path('article_show',{'id':article.id}) }}"> {{ article.title }}  </a>
+    <div>
+        <a href="{{ path('article_show',{'id':article.id}) }}"> {{ article.title }}  </a></div>
+
+    {#Grâce aux balises (span et a) je crée un bouton cliquable à côté du titre de chaque article#}
+    {# Ce bouton cliquable doit pouvoir nous faire modifier le titre de notre article  #}
+    {#Pour cela, j'utilise path, et j'indique le name de la route à emprunter, et la valeur de la wild card
+    de la route #}
+    {# l'id qui a pour valeur article.id #}
+
+        <span>
+            <a href="{{ path('article_modify_static',{'id':article.id}) }}"> Modifier  </a>
+        </span>
     </h1>
 
 
