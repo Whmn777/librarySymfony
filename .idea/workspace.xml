@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="167d8530-8905-42fa-ac4a-68b2281b3a6e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/templates/category_insert_static.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/insert_static.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Article.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Article.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ArticleController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/CategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CategoryController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,7 +150,7 @@
       <option name="presentableId" value="Default" />
       <updated>1606211863995</updated>
       <workItem from="1606211865189" duration="17827000" />
-      <workItem from="1606238895575" duration="6377000" />
+      <workItem from="1606238895575" duration="11989000" />
     </task>
     <servers />
   </component>
@@ -155,14 +158,22 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606288103823">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1606288103823" />
     <state x="464" y="259" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606212836007">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="464" y="259" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1606212836007" />
-    <state x="443" y="175" key="NewPhpClassDialog" timestamp="1606235705556">
+    <state x="458" y="212" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1606302022974">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="443" y="175" key="NewPhpClassDialog/0.0.1440.900@0.0.1440.900" timestamp="1606235705556" />
+    <state x="458" y="212" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1440.900@0.0.1440.900" timestamp="1606302022974" />
+    <state x="443" y="175" key="NewPhpClassDialog" timestamp="1606301437146">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="443" y="175" key="NewPhpClassDialog/0.0.1440.900@0.0.1440.900" timestamp="1606301437146" />
     <state x="443" y="194" key="NewPhpClassDialog/0.23.1440.877@0.23.1440.877" timestamp="1606220011965" />
   </component>
 </project>
