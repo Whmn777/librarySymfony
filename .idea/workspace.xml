@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="167d8530-8905-42fa-ac4a-68b2281b3a6e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/update_static.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/category_update_static.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/delete_article.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/ArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ArticleController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/CategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CategoryController.php" afterDir="false" />
@@ -142,6 +143,16 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
+  <component name="RunManager">
+    <configuration name="CategoryController.php" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/lybrarySymfony/Controller/CategoryController.php" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.CategoryController.php" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -151,7 +162,7 @@
       <option name="presentableId" value="Default" />
       <updated>1606211863995</updated>
       <workItem from="1606211865189" duration="17827000" />
-      <workItem from="1606238895575" duration="18925000" />
+      <workItem from="1606238895575" duration="24155000" />
     </task>
     <servers />
   </component>
@@ -171,10 +182,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="458" y="212" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1440.900@0.0.1440.900" timestamp="1606302022974" />
-    <state x="443" y="175" key="NewPhpClassDialog" timestamp="1606301437146">
+    <state x="443" y="175" key="NewPhpClassDialog" timestamp="1606319115035">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="443" y="175" key="NewPhpClassDialog/0.0.1440.900@0.0.1440.900" timestamp="1606301437146" />
+    <state x="443" y="175" key="NewPhpClassDialog/0.0.1440.900@0.0.1440.900" timestamp="1606319115035" />
     <state x="443" y="194" key="NewPhpClassDialog/0.23.1440.877@0.23.1440.877" timestamp="1606220011965" />
     <state x="229" y="89" key="SettingsEditor" timestamp="1606307751101">
       <screen x="0" y="0" width="1440" height="900" />

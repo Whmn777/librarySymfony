@@ -84,4 +84,53 @@ class CategoryController extends AbstractController
         return $this->render('category_insert_static.html.twig');
 
     }
+
+    /**
+     * Je crée une nouvelle route pour modifier le titre de mes catégories à partir de données statiques que j'ai
+     * instanciées dans mon Controller. Pour cela j'ajoute une wildcard id afin de selectionner la catégorie correspondant
+     * à modifier.
+     *
+     * @Route("/category/update-static/{id}", name="category_modify_static")
+     */
+
+    //Je créee une méthode publique updateStaticCategory pour :
+    // - récuperer chaque category à modifier grâce à la class CategoryRepository, et à l'id,
+    // - enregistrer mes modifications grâce à la class EntityManagerInterface et
+    // à la variable $entityManager qui va contenir mes modifications.
+
+
+    public function updateStaticCategory($id,CategoryRepository $categoryRepository, EntityManagerInterface $entityManager)
+    {
+        //Je récupère la categorie à modifier de ma BDD, en l'instanciant dans ma variable $category, grâce à la
+        // class CategoryRepository. J'utilise la variable $categoryRepository, et la méthode find() pour selectionner
+        //l'id de la category recherché.
+
+        $categorie = $categoryRepository->find($id);
+
+        //Grâce au setteur, je modifie la propriété Title de mon entité $category. Cela correspond à la modification
+        //de mes champs et enregistrements de ma table category de ma BDD.
+
+        $categorie->setTitle("Mon nouveau Titre de catégorie");
+        $categorie->setColor("purple");
+        $categorie->setCreationDate(new \DateTime());
+        $categorie->setPublicationDate(new \DateTime());
+        $categorie->setIsPublished(true);
+
+        //Avec la class EntityManagerInterface, j'effectue les modifications sur ma table category avec :
+
+        //la méthode persist, qui crée une entrée dans ma table,
+
+        $entityManager->persist($categorie);
+
+        //et la méthode flush(), qui injecte les données et les enregistrent dans ma table article.
+
+        $entityManager->flush();
+
+        //Je retourne ma fonction updateStaticCategory, avec la méthode render, afin de pouvoir l'afficher
+        // sur mon navigateur.
+
+        return $this->render("category_update_static.html.twig");
+
+    }
 }
+

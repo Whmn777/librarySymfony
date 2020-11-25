@@ -122,7 +122,7 @@ class ArticleController extends AbstractController
 
     /**
      * Je crée une nouvelle route pour modifier le titre de mes articles à partir de données statiques que j'ai
-     * instanciées dans mon Controller. Pour cela j'ajoute une wildcard id afin de selectionner l'article correspond
+     * instanciées dans mon Controller. Pour cela j'ajoute une wildcard id afin de selectionner l'article correspondant
      * à modifier.
      *
      * @Route("/article/update-static/{id}", name="article_modify_static")
@@ -163,4 +163,43 @@ class ArticleController extends AbstractController
         return $this->render("update_static.html.twig");
 
     }
+
+    /**
+     * Je crée une nouvelle route pour supprimer le titre de mes articles que j'ai
+     * selectionné dans mon Controller. Pour cela j'ajoute une wildcard id afin de selectionner l'article correspondant
+     * à supprimer.
+     *
+     * @Route("/article/delete/{id}", name="article_delete")
+     *
+     */
+
+    //Je créee une méthode publique deleteStaticArticle pour :
+    //- supprimer un article  à la class ArticleRepository, et à son 'id'.
+    //- enregistrer mes modifications grâce à la class EntityManagerInterface et
+    // à la variable $entityManager qui va contenir mes modifications.
+
+    public function deleteArticle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager)
+    {
+
+        //Je récupère grâce à la valeur $id de la wildcard, et grâce à ma class ArticleRepository l'article
+        //que veut supprimer. J'affecte cette $article à la valeur de $articleRepository, par la méthode find()
+        //de la class ArticleRepository.
+
+        $article = $articleRepository->find($id);
+
+        //Si la valeur de $article n'est pas nulle :
+        //avec la class EntityManager, j'instancie la variable $entityManager grâce à la méthode remove:
+        //elle récupère la valeur de mon article et la supprimer.
+        //Puis avec la méthode flush, ma valeur supprimée donc vide est enregistrée.
+
+        if (!is_null($article)) {
+            $entityManager->remove($article);
+            $entityManager->flush();
+        }
+
+        return $this->render("delete_article.html.twig");
+
+    }
+
+
 }
