@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Form\ArticleType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Repository\ArticleRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Article;
 
@@ -237,11 +238,23 @@ class ArticleController extends AbstractController
 
     //Je créee une méthode publique insertArticle afin de pouvoir créer une page sur mon navigateur affichant
     //le formulaire à renseigner.
+    //Je mets en paramètres deux autowire :
+    //-avec la classe Request pour récuperer mes requêtes (ici POST);
+    //-avec la classe EntityManagerInterface pour pouvoir gérer mes données avec la BDD,
+    //dont envoyer et enregistrer mes nouvelles données.
 
-    public function insertArticle( )
+    public function insertArticle( Request $request, EntityManagerInterface $entityManager)
     {
 
-        //Pour cela, je créee d'abord un gabarit de mon formulaire : j'utilise des lignes de commande sur le Terminal
+        //Soit la variable $article  : je crée une nouvelle instance de ma classe Article et lui affecte cette valeur.
+        //$article est une nouvelle propriété de mon entité Article, elle me permet de créer dans ma BDD un nouvel
+        // enregistrement.
+
+
+        $article = new Article();
+
+
+        //Puis, je créee d'abord un gabarit de mon formulaire : j'utilise des lignes de commande sur le Terminal
         //Je m'assure que je suis bien sur mon dossier de projet SF, et je saisis les commandes suivantes:
 
         //1. bin/console make: form
@@ -256,15 +269,37 @@ class ArticleController extends AbstractController
         // générer depuis mon Controller, mon gabarit. Les propiétés de mon Entité seront scannées et vont générer
         //les champs à renseigner de mon formulaire.
         //
-        //3.Je saisi donc mon Entity sur mon Terminal : Ici "Article".
+        //3.Je saisis donc mon Entity sur mon Terminal : Ici "Article".
 
 
         //Soit la variable $form correspondant au gabbarit que je veux générer.
         //Je lui donne la valeur d'un nouveau gabbarit que j'instancie par la méthode createForm de la classe
-        //AbstractController. Je lui met en paramètre (le chemin) la classe form que je viens de créer en ligne de commande.
+        //AbstractController. Je lui met en paramètre :
+        //- (le chemin) la classe form que je viens de créer en ligne de commande.
         //Ici : ArticleType::class (les deux - deux points signifie tout le chamin qui mène de ArticleType à ma class)
 
-        $form = $this->createForm(ArticleType::class);
+        // - en second paramètre : $article, afin de lier mon formulaire à renseigné à mon nouvel article (encore vide).
+
+        $form = $this->createForm(ArticleType::class, $article);
+
+        //Afin que les nouvelles données saisies lors de la requête soient prises en compte dans le formulaire,
+        //j'utilise la méthode handleRequest de la class Form avec en paramètre $Request(instance de la classe Request)
+        //pour relier mon formulaire $form aux reqûetes.
+
+        $form->handleRequest($request);
+
+        // Pour sécuriser le contenu des envois de données (valeurs non nulles, ou type de données de chaque champs adéquats)
+        //J'utilise les méthodes isSubmitted(estSoumis) et isValid(estValidé) de ma class Form,
+        //dans une condition :
+
+        //Si le formulaire est Soumis et Validé
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            // alors je l'enregistre en BDD
+            $entityManager->persist($article);
+            $entityManager->flush();
+        }
 
         //Grâce à la méthode creatView de la classe AbstractController, je convertis ma variable $form, en un format
         // lisible par twig.
