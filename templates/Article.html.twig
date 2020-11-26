@@ -1,16 +1,20 @@
 {% extends "base.html.twig" %}
 {#  Grâce à extends je fais relier mon fichier article.html.twig à bas.html.twig #}
 
-{% block title %}{{ article.title }}{% endblock %}
+{% block title %}{% endblock %}
 
 
 {% block main %}
 
 
-    <img src="{{ article.image }}" alt="Image" class="resp"/>
+    <div div class="row column justify-between align-center">
+
+        <img src="{{ article.image }}" alt="Image" class="resp"/>
+
+    </div>
 
     <h1>{{ article.title }}</h1>
-    <p>{{ article.content }}</p>
+    <p div class="row column justify-around align-center">{{ article.content }}</p>
 
 
 

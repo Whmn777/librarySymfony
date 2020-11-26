@@ -2,26 +2,45 @@
 {#  Grâce à extends je fais relier mon fichier article.html.twig à bas.html.twig #}
 
 
-{% block title %}Mes Articles{% endblock %}
+{% block title %}<h1><div class="row column justify-between align-center" >Ma librairie touristique</div></h1>{% endblock %}
 
 {% block main %}
 
-{#  J'ouvre une instruction for avec une acollade et % #}
+
+    {# Si mon message est supprimé
+    j'utilise la variable globale app définie dans twig :
+            (i.e)  app est dispo dans tous les fichiers twig
+            et contient des informations un peu générales : les messages flashs, les infos
+            de l'utilisateur connecté (si y'en a un) etc..
+    #}
+    {% for message in app.flashes('success') %}
+        <p>{{ message }}</p>
+    {% endfor %}
+
+
+
+    {#  J'ouvre une instruction for avec une acollade et % #}
 {# Pour chaque article de mon tableau contenant tous les articles possibles #}
 
 {% for article in articles %}
 
 
-
     {# J'insère une image de chaque article depuis ma base de données grâce à la variable article.image #}
 
-    <img src="{{ article.image }}" alt="Image" class="resp"/>
+    <div class="row column justify-between align-center">
+        "<img src="{{ article.image }}" alt="Image" class="resp"/>
+    </div>
+
+
 
     {#Grâce à la balise (a) je crée un lien cliquable sur le titre de chaque article#}
      {#Avec path, j'indique le name de la route à emprunter, et la valeur de la wild card de la route #}
     {# l'id qui a pour valeur article.id #}
-    <div>
-        <a href="{{ path('article_show',{'id':article.id}) }}"> {{ article.title }}  </a></div>
+    <h1>
+         <div class="row column justify-between align-center">
+             <a href="{{ path('article_show',{'id':article.id}) }}"> {{ article.title }}  </a>
+         </div>
+    </h1>
 
 
 
@@ -30,21 +49,24 @@
     de la route #}
     {# l'id qui a pour valeur article.id #}
 
-        <span>
+    <h3>
+        <span class="row-justifify_around-button">
 
             {# Un bouton cliquable pour modifier le titre de mon article  #}
-            <a href="{{ path('article_modify_static',{'id':article.id}) }}"> Modifier  </a></br>
+            <a href="{{ path('article_modify_static',{'id':article.id}) }}"> Modifier  </a>
+        </span></br>
+    </h3>
 
+
+    <h3>
+        <span class="row-justifify_content">
             {# Un bouton cliquable pour supprimer mon article  #}
-            <a href="{{ path('article_delete',{'id':article.id}) }}"> Supprimer l'article  </a>
-
+            <a href="{{ path('article_delete',{'id':article.id}) }}"> Supprimer l'article </a>
         </span>
+    </h3>
 
 
 
-
-
-    </h1>
 
 
 

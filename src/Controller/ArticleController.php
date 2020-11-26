@@ -93,10 +93,21 @@ class ArticleController extends AbstractController
 
        //J'utilise des setteurs pour modifier les proriétés de ma class entité Article.
 
-        $article->setTitle("Insérer des Données Statiques");
-        $article->setContent("J'utilise ma fonction insertArticle, avec pour paramètres la class EntityManagerInterface
-          et la variable entityManager");
-        $article->setImage("https://secure.meetupstatic.com/photos/event/1/3/c/1/600_467885057.jpeg");
+        $article->setTitle("Plage de Kiki Peng à Lifou");
+        $article->setContent("Rarement référencée dans les guides ou cartes touristiques (celle de la Province 
+        des îles ne l’indique pas), la plage de Kiki se dessine le long des falaises de la côte Ouest de Lifou. Perdue
+        au milieu de nulle part, la plage est un véritable havre de paix d’une centaine de mètres de longueur, bordée 
+        d’une eau turquoise qui laisse rêveur. A noter que les tâches verdâtres dans l’eau (présentes sur les photos 
+        ci dessous) sont dues aux algues. De nombreuses personnes nous ont dit être surprises de les voir, c’est donc
+        qu’elles ne doivent pas être dans l’eau très souvent.
+        Sa particularité ? Elle est cachée au bout d’un chemin en pleine forêt ! 
+        Le départ du sentier pour la plage se trouve au niveau d’une maison d’un habitant de Xépénéhé. 
+        Plus précisément lorsque vous arrivez au terrain de football. Lorsqu’il est face à vous, rejoignez le coin 
+        gauche au fond, la maison est à cet endroit avec un petit panneau « Plage de Kiki ». Comptez 500F/personne. 
+        Le sentier (30 minutes de marche) est relativement plat et facilement praticable (sauf 2 ou 3 passages un peu 
+        escarpés), pensez tout de même à mettre des chaussures fermées car vous êtes en plein milieu 
+        d’une forêt humide !");
+        $article->setImage("https://www.unjourencaledonie.com/wp-content/uploads/2017/09/lifou-plage-de-peng_02.jpg");
         $article->setCreationDate(new \DateTime());
         $article->setPublicationDate(new \DateTime());
         $article->setIsPublished(true);
@@ -182,24 +193,40 @@ class ArticleController extends AbstractController
     {
 
         //Je récupère grâce à la valeur $id de la wildcard, et grâce à ma class ArticleRepository l'article
-        //que veut supprimer. J'affecte cette $article à la valeur de $articleRepository, par la méthode find()
+        //que je veux supprimer. J'affecte cette $article à la valeur de $articleRepository, par la méthode find()
         //de la class ArticleRepository.
 
         $article = $articleRepository->find($id);
 
         //Si la valeur de $article n'est pas nulle :
         //avec la class EntityManager, j'instancie la variable $entityManager grâce à la méthode remove:
-        //elle récupère la valeur de mon article et la supprimer.
+        //elle récupère la valeur de mon article et la supprime.
         //Puis avec la méthode flush, ma valeur supprimée donc vide est enregistrée.
 
         if (!is_null($article)) {
             $entityManager->remove($article);
             $entityManager->flush();
+
+            // J'utilise la méthode addFlash native de Symfony
+            // pour afficher sur ma page de liste d'articles
+            //un message flash de type "succès"
+            // et signalé à l'utilisateur qu'il a bien supprimé l'article
+
+            $this->addFlash(
+                "success",
+                "Bravo : Vous avez bien supprimé cet article !!!"
+            );
         }
 
-        return $this->render("delete_article.html.twig");
+        // J'utilise la méthode redirectToRoute de la class AbstractController
+        //pour rediriger l'utilisateur vers la page : liste d'articles,
+        // une fois la suppression faite.
 
-    }
+        return $this->redirectToRoute("article_list");
+
+        }
+
+
 
 
 }
