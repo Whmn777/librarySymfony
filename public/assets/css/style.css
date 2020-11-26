@@ -38,9 +38,14 @@
 }
 
 .button{
-    border: solid 1px blue;
-    border-radius : 10px;
-    margin: auto;
+    width: 150px;
+    padding: 10px 5px;
+    color: white;
+    font-size: 1em;
+    background-color: pink;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    text-align: center;
 }
 
 

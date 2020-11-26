@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+
+    {#
+    j'utilise la fonction twig form pour afficher mon formulaire
+    (avec en parametre la variable de formulaire.
+        pour rappel : {{  }} pour utiliser une instruction dans twig
+                       {  }  pour afficher une valeur depuis une variable.
+    #}
+
+    {{ form(formView) }}
+
+{% endblock main %}

@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 use Doctrine\ORM\EntityManagerInterface;
+use App\Form\ArticleType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Repository\ArticleRepository;
 use Symfony\Component\Routing\Annotation\Route;
@@ -207,7 +208,7 @@ class ArticleController extends AbstractController
             $entityManager->remove($article);
             $entityManager->flush();
 
-            // J'utilise la méthode addFlash native de Symfony
+            // J'utilise la méthode addFlash native de Symfony (de la class AbstractController)
             // pour afficher sur ma page de liste d'articles
             //un message flash de type "succès"
             // et signaler à l'utilisateur qu'il a bien supprimé l'article.
@@ -225,5 +226,58 @@ class ArticleController extends AbstractController
         return $this->redirectToRoute("article_list");
 
         }
+
+    /**
+     * Je créee un nouvelle route pour insérer des données directement depuis un formulaire :
+     * (i.e) que l'utilisateur va pouvoir, à partir d'une page formulaire sur le navigateur,
+     *  y insérer des données au lieu de le faire depuis le Controller.
+     *
+     * @Route("/article/insert", name="article_insert")
+     */
+
+    //Je créee une méthode publique insertArticle afin de pouvoir créer une page sur mon navigateur affichant
+    //le formulaire à renseigner.
+
+    public function insertArticle( )
+    {
+
+        //Pour cela, je créee d'abord un gabarit de mon formulaire : j'utilise des lignes de commande sur le Terminal
+        //Je m'assure que je suis bien sur mon dossier de projet SF, et je saisis les commandes suivantes:
+
+        //1. bin/console make: form
+        // A partir de ma console je crée un dossier Form dans le Controller de mon dossier projet :
+        //Cela me permet de créer la class form qui va me permettre de générer mon gabarit sur SF.
+        //
+        //Je nomme donc ma class en utilisant le nom de mon entité (où je dois modifier les propriétés) suivi de Type
+        //Je saisi donc sur mon Terminal:
+        //2. EntityNameType (Je crée dans Form, un fichier que nomme "EntityName" suivi de "Type". Ici "Article".
+        //
+        //Je renseigne dans mon Terminal le nom de mon Entité qui sera utiliser par SF pour
+        // générer depuis mon Controller, mon gabarit. Les propiétés de mon Entité seront scannées et vont générer
+        //les champs à renseigner de mon formulaire.
+        //
+        //3.Je saisi donc mon Entity sur mon Terminal : Ici "Article".
+
+
+        //Soit la variable $form correspondant au gabbarit que je veux générer.
+        //Je lui donne la valeur d'un nouveau gabbarit que j'instancie par la méthode createForm de la classe
+        //AbstractController. Je lui met en paramètre (le chemin) la classe form que je viens de créer en ligne de commande.
+        //Ici : ArticleType::class (les deux - deux points signifie tout le chamin qui mène de ArticleType à ma class)
+
+        $form = $this->createForm(ArticleType::class);
+
+        //Grâce à la méthode creatView de la classe AbstractController, je convertis ma variable $form, en un format
+        // lisible par twig.
+        // Je nomme donc cette prévisualisation de mon gabbarit $formView
+
+        $formView = $form->createView();
+
+        //Je retourne ma fonction insertArticle, avec la méthode render, afin de pouvoir l'afficher en htpp
+        // sur mon navigateur.
+
+        return $this->render('article/insert.html.twig', [
+            'formView' => $formView
+        ]);
+    }
 
 }

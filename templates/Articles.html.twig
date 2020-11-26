@@ -54,8 +54,8 @@
     de la route #}
     {# l'id qui a pour valeur article.id #}
 
-    <h3>
-        <span class="row-justifify_around-button">
+    <h3 class="row column justify-between align-center">
+        <span class="row justifify-content align-center button">
 
             {# Un bouton cliquable pour modifier le titre de mon article  #}
             <a href="{{ path('article_modify_static',{'id':article.id}) }}"> Modifier  </a>
@@ -63,8 +63,8 @@
     </h3>
 
 
-    <h3>
-        <span class="row-justifify_content">
+    <h3 class="row column justify-between align-center">
+        <span class="row justifify-content align-center button">
             {# Un bouton cliquable pour supprimer mon article  #}
             <a href="{{ path('article_delete',{'id':article.id}) }}"> Supprimer l'article </a>
         </span>
