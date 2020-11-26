@@ -210,7 +210,7 @@ class ArticleController extends AbstractController
             // J'utilise la méthode addFlash native de Symfony
             // pour afficher sur ma page de liste d'articles
             //un message flash de type "succès"
-            // et signalé à l'utilisateur qu'il a bien supprimé l'article
+            // et signaler à l'utilisateur qu'il a bien supprimé l'article.
 
             $this->addFlash(
                 "success",
@@ -225,8 +225,5 @@ class ArticleController extends AbstractController
         return $this->redirectToRoute("article_list");
 
         }
-
-
-
 
 }

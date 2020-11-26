@@ -4,8 +4,9 @@
 
 {% block title %}<h1><div class="row column justify-between align-center" >Ma librairie touristique</div></h1>{% endblock %}
 
-{% block main %}
 
+
+{% block message %}
 
     {# Si mon message est supprimé
     j'utilise la variable globale app définie dans twig :
@@ -17,9 +18,13 @@
         <p>{{ message }}</p>
     {% endfor %}
 
+{% endblock message%}
 
 
-    {#  J'ouvre une instruction for avec une acollade et % #}
+
+{% block main %}
+
+{#  J'ouvre une instruction for avec une acollade et % #}
 {# Pour chaque article de mon tableau contenant tous les articles possibles #}
 
 {% for article in articles %}
@@ -34,7 +39,7 @@
 
 
     {#Grâce à la balise (a) je crée un lien cliquable sur le titre de chaque article#}
-     {#Avec path, j'indique le name de la route à emprunter, et la valeur de la wild card de la route #}
+    {#Avec path, j'indique le name de la route à emprunter, et la valeur de la wild card de la route #}
     {# l'id qui a pour valeur article.id #}
     <h1>
          <div class="row column justify-between align-center">

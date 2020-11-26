@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="167d8530-8905-42fa-ac4a-68b2281b3a6e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/assets/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/asset/css/style.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/ArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ArticleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Articles.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Articles.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/articles.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/articles.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -170,7 +168,7 @@
       <option name="presentableId" value="Default" />
       <updated>1606211863995</updated>
       <workItem from="1606211865189" duration="17827000" />
-      <workItem from="1606238895575" duration="36162000" />
+      <workItem from="1606238895575" duration="37013000" />
     </task>
     <servers />
   </component>

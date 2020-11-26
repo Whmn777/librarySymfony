@@ -13,8 +13,9 @@
     {% block title %}{% endblock %}
 </head>
 <body>
+        <head>{% block message %}{% endblock message %}</head>
 
-        {% block main %} <main class="container"></main>{% endblock %}
+        <main class="container"> {% block main %} {% endblock main %}</main>
 
     </body>
 </html>
