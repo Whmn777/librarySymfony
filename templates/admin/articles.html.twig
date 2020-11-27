@@ -24,6 +24,11 @@
 
 {% block main %}
 
+
+    {# - Je créée un bouton cliquable : Créer un nouvel article avec la fonction path et je lui mets en paramètre
+    le "name" de la route de la page à afficher#}
+
+
     <h3 class="row column justify-between align-center">
         <span class="row justifify-content align-center button">
             <a href="{{ path('admin_article_list') }}"> Créer un nouvel article  </a>
@@ -59,7 +64,7 @@
         {#Pour cela, j'utilise path, et j'indique le name de la route à emprunter, et la valeur de la wild card
     de la route #}
         {# l'id qui a pour valeur article.id
-        -Un bouton cliquable Créer un nouvel article
+
         -Un bouton cliquable Modifier l'article
         -Un bouton cliquable Supprimer l'article#}
 
