@@ -1,0 +1,87 @@
+{% extends "base.html.twig" %}
+{#  Grâce à extends je fais relier mon fichier article.html.twig à bas.html.twig #}
+
+
+{% block title %}<h1><div class="row column justify-between align-center" >Ma librairie touristique de Lifou Nelle - Calédonie</div></h1>{% endblock %}
+
+
+
+{% block message %}
+
+    {# Si mon message est supprimé
+    j'utilise la variable globale app définie dans twig :
+            (i.e)  app est dispo dans tous les fichiers twig
+            et contient des informations un peu générales : les messages flashs, les infos
+            de l'utilisateur connecté (si y'en a un) etc..
+    #}
+    {% for message in app.flashes('success') %}
+        <p>{{ message }}</p>
+    {% endfor %}
+
+{% endblock message%}
+
+
+
+{% block main %}
+
+    <h3 class="row column justify-between align-center">
+        <span class="row justifify-content align-center button">
+            <a href="{{ path('admin_article_list') }}"> Créer un nouvel article  </a>
+        </span></br>
+    </h3>
+
+    {#  J'ouvre une instruction for avec une acollade et % #}
+    {# Pour chaque article de mon tableau contenant tous les articles possibles #}
+
+    {% for article in articles %}
+
+
+        {# J'insère une image de chaque article depuis ma base de données grâce à la variable article.image #}
+
+        <div class="row column justify-between align-center">
+            "<img src="{{ article.image }}" alt="Image" class="resp"/>
+        </div>
+
+
+
+        {#Grâce à la balise (a) je crée un lien cliquable sur le titre de chaque article#}
+        {#Avec path, j'indique le name de la route à emprunter, et la valeur de la wild card de la route #}
+        {# l'id qui a pour valeur article.id #}
+        <h1>
+            <div class="row column justify-between align-center">
+                <a href="{{ path('article_show',{'id':article.id}) }}"> {{ article.title }}  </a>
+            </div>
+        </h1>
+
+
+
+        {#Grâce aux balises (span et a) je crée un bouton cliquable à côté du titre de chaque article#}
+        {#Pour cela, j'utilise path, et j'indique le name de la route à emprunter, et la valeur de la wild card
+    de la route #}
+        {# l'id qui a pour valeur article.id
+        -Un bouton cliquable Créer un nouvel article
+        -Un bouton cliquable Modifier l'article
+        -Un bouton cliquable Supprimer l'article#}
+
+
+
+
+        <h3 class="row column justify-between align-center">
+        <span class="row justifify-content align-center button">
+            {# Un bouton cliquable pour supprimer mon article  #}
+            <a href="{{ path('admin_article_list',{'id':article.id}) }}"> Modifier l'article </a>
+        </span>
+        </h3>
+
+        <h3 class="row column justify-between align-center">
+        <span class="row justifify-content align-center button">
+            <a href="{{ path('admin_article_list',{'id':article.id}) }}"> Supprimer l'article  </a>
+        </span></br>
+        </h3>
+
+
+    {% endfor %}
+    {# Je referme mon instruction avec endfor #}
+
+{% endblock main %}
+{# Je referme mon block main avec endblock #}

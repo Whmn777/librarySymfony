@@ -1,16 +1,14 @@
 <?php
-
-
 namespace App\Controller;
 
 
-use Doctrine\ORM\EntityManagerInterface;
-use App\Form\ArticleType;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Repository\ArticleRepository;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Article;
+    use Doctrine\ORM\EntityManagerInterface;
+    use App\Form\ArticleType;
+    use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+    use App\Repository\ArticleRepository;
+    use Symfony\Component\HttpFoundation\Request;
+    use Symfony\Component\Routing\Annotation\Route;
+    use App\Entity\Article;
 
 class ArticleController extends AbstractController
 
@@ -36,10 +34,9 @@ class ArticleController extends AbstractController
         //je mets en paramètres de la méthode render, le nom du fichier article.html.twig et d'un tableau
         //ayant pour variable 'articles' le nom de ma variable dans twig et $articles sa valeur dans ma BDD
 
-        return $this->render('articles.html.twig', [
+        return $this->render('front.articles.html.twig', [
             'articles' => $articles
-        ]);
-;
+        ]);;
     }
 
     //Je crée une nouvelle route pour accéder à la page de chaque article, en utilisant la wilde card {id}
@@ -51,7 +48,7 @@ class ArticleController extends AbstractController
     // l'injection de dépendances (class) ou encore l'autowire ayant pour classe ArticleRepository
     // et pour valeur $articleRepository
 
-    public function articleShow($id,ArticleRepository $articleRepository)
+    public function articleShow($id, ArticleRepository $articleRepository)
     {
         //Je récupère tous mes articles dans ma BBD
         // en utilisant la méthode publique articleShow et le mécanisme d'autowire de SF
@@ -67,7 +64,7 @@ class ArticleController extends AbstractController
         //je mets en paramètres de la méthode render, le nom du fichier article.html.twig et d'un tableau
         //ayant pour variable 'article' le nom de ma variable dans twig et $article sa valeur dans ma BDD.
 
-       return $this->render('article.html.twig', [
+        return $this->render('article.html.twig', [
             'article' => $article
         ]);
 
@@ -84,30 +81,30 @@ class ArticleController extends AbstractController
     // va me permettre de réaliser des requêtes INSERT, UPDATE et DELETE dans ma BDD. Je rajoute la variable
     //$entityManager
 
-    public function insertStaticArticle(EntityManagerInterface $entityManager )
+    public function insertStaticArticle(EntityManagerInterface $entityManager)
     {
 
         //Dans la variable $article, j'instancie un nouvel objet newArticle de la classe entité Article.
         //Je peux ainsi redéfinir à ma class entité des nouvelles propriétés, qui seront insérer comme des
         //nouveaux champs sur ma table article dans ma BDD.
 
-       $article = new Article();
+        $article = new Article();
 
-       //J'utilise des setteurs pour modifier les proriétés de ma class entité Article.
+        //J'utilise des setteurs pour modifier les proriétés de ma class entité Article.
 
         $article->setTitle("Plage de Kiki Peng à Lifou");
-        $article->setContent("Rarement référencée dans les guides ou cartes touristiques (celle de la Province 
+        $article->setContent("Rarement référencée dans les guides ou cartes touristiques (celle de la Province
         des îles ne l’indique pas), la plage de Kiki se dessine le long des falaises de la côte Ouest de Lifou. Perdue
-        au milieu de nulle part, la plage est un véritable havre de paix d’une centaine de mètres de longueur, bordée 
-        d’une eau turquoise qui laisse rêveur. A noter que les tâches verdâtres dans l’eau (présentes sur les photos 
+        au milieu de nulle part, la plage est un véritable havre de paix d’une centaine de mètres de longueur, bordée
+        d’une eau turquoise qui laisse rêveur. A noter que les tâches verdâtres dans l’eau (présentes sur les photos
         ci dessous) sont dues aux algues. De nombreuses personnes nous ont dit être surprises de les voir, c’est donc
         qu’elles ne doivent pas être dans l’eau très souvent.
-        Sa particularité ? Elle est cachée au bout d’un chemin en pleine forêt ! 
-        Le départ du sentier pour la plage se trouve au niveau d’une maison d’un habitant de Xépénéhé. 
-        Plus précisément lorsque vous arrivez au terrain de football. Lorsqu’il est face à vous, rejoignez le coin 
-        gauche au fond, la maison est à cet endroit avec un petit panneau « Plage de Kiki ». Comptez 500F/personne. 
-        Le sentier (30 minutes de marche) est relativement plat et facilement praticable (sauf 2 ou 3 passages un peu 
-        escarpés), pensez tout de même à mettre des chaussures fermées car vous êtes en plein milieu 
+        Sa particularité ? Elle est cachée au bout d’un chemin en pleine forêt !
+        Le départ du sentier pour la plage se trouve au niveau d’une maison d’un habitant de Xépénéhé.
+        Plus précisément lorsque vous arrivez au terrain de football. Lorsqu’il est face à vous, rejoignez le coin
+        gauche au fond, la maison est à cet endroit avec un petit panneau « Plage de Kiki ». Comptez 500F/personne.
+        Le sentier (30 minutes de marche) est relativement plat et facilement praticable (sauf 2 ou 3 passages un peu
+        escarpés), pensez tout de même à mettre des chaussures fermées car vous êtes en plein milieu
         d’une forêt humide !");
         $article->setImage("https://www.unjourencaledonie.com/wp-content/uploads/2017/09/lifou-plage-de-peng_02.jpg");
         $article->setCreationDate(new \DateTime());
@@ -226,10 +223,10 @@ class ArticleController extends AbstractController
 
         return $this->redirectToRoute("article_list");
 
-        }
+    }
 
     /**
-     * Je créee un nouvelle route pour insérer des données directement depuis un formulaire :
+     * Je créee une nouvelle route pour insérer des données directement depuis un formulaire :
      * (i.e) que l'utilisateur va pouvoir, à partir d'une page formulaire sur le navigateur,
      *  y insérer des données au lieu de le faire depuis le Controller.
      *
@@ -243,11 +240,11 @@ class ArticleController extends AbstractController
     //-avec la classe EntityManagerInterface pour pouvoir gérer mes données avec la BDD,
     //dont envoyer et enregistrer mes nouvelles données.
 
-    public function insertArticle( Request $request, EntityManagerInterface $entityManager)
+    public function insertArticle(Request $request, EntityManagerInterface $entityManager)
     {
 
         //Soit la variable $article  : je crée une nouvelle instance de ma classe Article et lui affecte cette valeur.
-        //$article est une nouvelle propriété de mon entité Article, elle me permet de créer dans ma BDD un nouvel
+        //$article est une nouvelle instance de mon entité Article, elle me permet de créer dans ma BDD un nouvel
         // enregistrement.
 
 
@@ -263,7 +260,7 @@ class ArticleController extends AbstractController
         //
         //Je nomme donc ma class en utilisant le nom de mon entité (où je dois modifier les propriétés) suivi de Type
         //Je saisi donc sur mon Terminal:
-        //2. EntityNameType (Je crée dans Form, un fichier que nomme "EntityName" suivi de "Type". Ici "Article".
+        //2. EntityNameType (Je crée dans Form, un fichier que je nomme "EntityName" suivi de "Type". Ici "Article".
         //
         //Je renseigne dans mon Terminal le nom de mon Entité qui sera utiliser par SF pour
         // générer depuis mon Controller, mon gabarit. Les propiétés de mon Entité seront scannées et vont générer
@@ -284,7 +281,7 @@ class ArticleController extends AbstractController
 
         //Afin que les nouvelles données saisies lors de la requête soient prises en compte dans le formulaire,
         //j'utilise la méthode handleRequest de la class Form avec en paramètre $Request(instance de la classe Request)
-        //pour relier mon formulaire $form aux reqûetes.
+        //pour relier mon formulaire $form aux nouvelles reqûetes.
 
         $form->handleRequest($request);
 
@@ -294,14 +291,13 @@ class ArticleController extends AbstractController
 
         //Si le formulaire est Soumis et Validé
 
-        if ($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             // alors je l'enregistre en BDD
             $entityManager->persist($article);
             $entityManager->flush();
         }
 
-        //Grâce à la méthode creatView de la classe AbstractController, je convertis ma variable $form, en un format
+        //Grâce à la méthode creatView de la classe AbstractController, je convertie ma variable $form, en un format
         // lisible par twig.
         // Je nomme donc cette prévisualisation de mon gabbarit $formView
 

@@ -2,9 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="167d8530-8905-42fa-ac4a-68b2281b3a6e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Controller/AdminArticleController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/FrontArticleController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/admin/articles.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/front/article.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/ArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ArticleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/ArticleType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ArticleType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/Article.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/Articles.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/article/insert.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/delete_article.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/insert_static.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/update_static.html.twig" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,13 +146,19 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/front" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/front" />
+      <recent name="$PROJECT_DIR$/templates/admin" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/front" />
+      <recent name="$PROJECT_DIR$/templates/admin" />
       <recent name="$PROJECT_DIR$/templates" />
       <recent name="$PROJECT_DIR$" />
     </key>
@@ -167,7 +182,7 @@
       <option name="presentableId" value="Default" />
       <updated>1606211863995</updated>
       <workItem from="1606211865189" duration="17827000" />
-      <workItem from="1606238895575" duration="46736000" />
+      <workItem from="1606238895575" duration="74730000" />
     </task>
     <servers />
   </component>
@@ -187,19 +202,23 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="458" y="212" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1440.900@0.0.1440.900" timestamp="1606302022974" />
-    <state x="443" y="175" key="NewPhpClassDialog" timestamp="1606319115035">
+    <state x="443" y="175" key="NewPhpClassDialog" timestamp="1606420969942">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="443" y="175" key="NewPhpClassDialog/0.0.1440.900@0.0.1440.900" timestamp="1606319115035" />
+    <state x="443" y="175" key="NewPhpClassDialog/0.0.1440.900@0.0.1440.900" timestamp="1606420969942" />
     <state x="443" y="194" key="NewPhpClassDialog/0.23.1440.877@0.23.1440.877" timestamp="1606220011965" />
-    <state x="229" y="89" key="SettingsEditor" timestamp="1606307751101">
+    <state x="229" y="89" key="SettingsEditor" timestamp="1606404874989">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="229" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1606307751101" />
+    <state x="229" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1606404874989" />
     <state x="320" y="191" key="Vcs.Push.Dialog.v2" timestamp="1606321074614">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="320" y="191" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1606321074614" />
+    <state x="533" y="371" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606470103289">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="533" y="371" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1440.900@0.0.1440.900" timestamp="1606470103289" />
     <state x="428" y="51" width="584" height="798" key="find.popup" timestamp="1606321063094">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
