@@ -34,9 +34,9 @@ class ArticleController extends AbstractController
         //je mets en paramètres de la méthode render, le nom du fichier article.html.twig et d'un tableau
         //ayant pour variable 'articles' le nom de ma variable dans twig et $articles sa valeur dans ma BDD
 
-        return $this->render('front.articles.html.twig', [
+        return $this->render('admin/articles.html.twig', [
             'articles' => $articles
-        ]);;
+        ]);
     }
 
     //Je crée une nouvelle route pour accéder à la page de chaque article, en utilisant la wilde card {id}
@@ -64,7 +64,7 @@ class ArticleController extends AbstractController
         //je mets en paramètres de la méthode render, le nom du fichier article.html.twig et d'un tableau
         //ayant pour variable 'article' le nom de ma variable dans twig et $article sa valeur dans ma BDD.
 
-        return $this->render('article.html.twig', [
+        return $this->render('front/article.html.twig', [
             'article' => $article
         ]);
 

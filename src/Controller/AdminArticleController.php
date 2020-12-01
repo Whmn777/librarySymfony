@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Article;
 
+
 class AdminArticleController extends AbstractController
 
 {
@@ -24,7 +25,7 @@ class AdminArticleController extends AbstractController
 
 
     // Puis je récupère tous mes articles dans ma BBD
-    // en utilisant la méthode publique "articleListe" et le mécanisme d'autowire de SF
+    // en utilisant la méthode publique "articleList" et le mécanisme d'autowire de SF
     // ayant pour paramètres la classe Articlerepository et la variable $articleRepository.
     // Grâce à la méthode "findAll" de la classe ArticleRepository,
     // J'envoie une requête SELECT ALL à ma BDD pour récupérer tous les articles de ma table.
@@ -35,9 +36,10 @@ class AdminArticleController extends AbstractController
 
         $articles = $articleRepository->findAll();
 
-        // Je retourne grâce à la méthode render de la classe Abstracontroller dont j'ai fait hériter
-        // la class AdminArticleController.
-        // je mets en paramètres de la méthode render, le nom du fichier admnin_article.html.twig et d'un tableau
+        // Je retourne ma méthode "articleList" grâce à la méthode render de la classe Abstracontroller
+        // pour qui j'ai fait hériter la class AdminArticleController.
+
+        // Je mets en paramètres de la méthode render, le nom du fichier admnin_article.html.twig et d'un tableau
         // ayant pour variable 'articles' le nom de ma variable dans twig et $articles sa valeur dans ma BDD
 
         return $this->render('admin/articles.html.twig', [
@@ -305,7 +307,7 @@ class AdminArticleController extends AbstractController
         // - mon fichier twig correspondant,
         // - un tableau ayant pour index la variable 'formView' sur twig, qui correspond à la valeur $formView dans php.
 
-        return $this->render('articles.html.twig', [
+        return $this->render('admin/form.html.twig', [
             'formView' => $formView
         ]);
     }

@@ -1,11 +1,19 @@
 {% extends "base.html.twig" %}
-{#  Grâce à extends je fais relier mon fichier article.html.twig à bas.html.twig #}
-
-
-{% block title %} Mes Catégories {% endblock %}
+{#  Grâce à extends je fais relier mon fichier category.html.twig à bas.html.twig #}
 
 
 {% block main %}
+
+
+    {# - Je créée un bouton cliquable : Créer une nouvelle catégorie avec la fonction path et je lui mets en paramètre
+    le "name" de la route de la page à afficher#}
+
+
+    <h3 class="row column justify-between align-center">
+        <span class="row justifify-content align-center button">
+            <a href="{{ path('admin_category_list') }}"> Créer une nouvelle catégorie  </a>
+        </span></br>
+    </h3>
 
     {#  J'ouvre une instruction for avec une acollade et % #}
     {# Pour chaque catégorie de mon tableau contenant toutes les catégories possibles #}
@@ -18,10 +26,31 @@
 
         <h1 style="color:{{ categorie.color }}">{{ categorie.title }}</h1>
 
+        {#Grâce à la balise (a) je crée un lien cliquable sur chaque catégorie
+        afin de pouvoir:
+        - modifier la catégorie,
+        -supprimer la catégorie.#}
 
+        {#Avec path, j'indique le name de la route à emprunter, et la valeur de la wild card de la route #}
+        {# l'id qui a pour valeur article.id #}
+
+        <h3 class="row column justify-between align-center">
+        <span class="row justifify-content align-center button">
+            {# Un bouton cliquable pour supprimer mon article  #}
+            <a href="{{ path('admin_category_list',{'id': categorie.id}) }}"> Modifier la catégorie </a>
+        </span>
+        </h3>
+
+        <h3 class="row column justify-between align-center">
+        <span class="row justifify-content align-center button">
+            <a href="{{ path('admin_category_list',{'id': categorie.id}) }}"> Supprimer l'article  </a>
+        </span></br>
+        </h3>
+
+
+        {# Je referme mon instruction avec endfor #}
 
     {% endfor %}
-    {# Je referme mon instruction avec endfor #}
 
 {% endblock main %}
 {# Je referme mon block main avec endblock #}

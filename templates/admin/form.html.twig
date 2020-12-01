@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Les Articles{% endblock %}
+
+
+
+{% block main %}
+
+    <main>
+
+
+        <section class="p-3 mb-2 bg-primary text-white">
+            {# J'utilise la fonction Twig form pour afficher mon formulaire  #}
+            {# avec en parametre la variable de formulaire : formView #}
+
+            {# <div><h1>Créer un nouvel Article</h1></div> <br/>
+
+            Ici j'affiche le formulaire en un bloc : Seul le bloc pourra être styllisé mais pas
+            chaque champs pris séparémment.
+
+            <div>{{ form(formView) }}</div> #}
+
+
+            {# Pour stylliser mon formulaire : Je scinde l'affichage par champs. Et grâce à des balises html
+               je peux spécifier ainsi et cibler les attributs de style pour personnaliser l'apparence
+               de mon formulaire.#}
+
+
+            <div class="form-group">
+
+
+            {#  J'ouvre mon formulaire :#}
+            {{ form_start(formView) }}
+
+
+                {# J'affiche le label et l'input pour le titre :
+
+                   le formulaire aura pour chaque champs de mon tableau:
+                   un label avec 'form_label'
+                   un input avec 'form_widget'
+                   un champs qui affichera les messages d'erreurs de saisie de données
+                   dans le formulaire.#}
+
+                <div class="row form-group">
+                    {{ form_label (formView.title)}}
+                    {{ form_widget (formView.title) }}
+                    {{ form_errors(formView.title) }}
+                </div>
+
+                {# J'affiche le label et l'input pour le content : #}
+                <div class=" row form-group">
+                    {{ form_label (formView.content)}}
+                    {{ form_widget (formView.content) }}
+                    {{ form_errors(formView.content) }}
+                </div >
+
+                {#// J'affiche le label et l'input pour l'image' : #}
+                <div class="form-group">
+                    {{ form_label (formView.image)}}
+                    {{ form_widget (formView.image) }}
+                    {{ form_errors(formView.content) }}
+                </div >
+
+                {# J'affiche le label et l'input pour le publicationDate : #}
+                <div class="form-group">
+                    {{ form_label (formView.publicationDate)}}
+                    {{ form_widget (formView.publicationDate) }}
+                    {{ form_errors(formView.content) }}
+                </div >
+
+                {# J'affiche le label et l'input pour le publicationDate : #}
+                <div class="form-group">
+                    {{ form_label (formView.creationDate)}}
+                    {{ form_widget (formView.creationDate) }}
+                    {{ form_errors(formView.content) }}
+                </div >
+
+                {# J'affiche le label et l'input pour isPublished : #}
+                <div class="form-group">
+                    {{ form_label (formView.isPublished)}}
+                    {{ form_widget (formView.isPublished) }}
+                </div>
+
+                {# J'affiche  le bouton : #}
+                <div class="form-group">
+                    {{ form_widget(formView.valider) }}
+                </div>
+
+                {# J'affiche le label et l'input du volet déroulant affichant chaque catégorie: #}
+                <div class="row form-group">
+                    {{ form_label (formView.category)}}
+                    {{ form_widget (formView.category) }}
+                    {{ form_errors(formView.category) }}
+                </div>
+
+
+            {# Je ferme mon formulaire : #}
+            {{ form_end(formView) }}
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+{% endblock main %}

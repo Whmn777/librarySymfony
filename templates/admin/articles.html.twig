@@ -43,8 +43,8 @@
 
         {# J'insère une image de chaque article depuis ma base de données grâce à la variable article.image #}
 
-        <div class="row column justify-between align-center">
-            "<img src="{{ article.image }}" alt="Image" class="resp"/>
+        <div class="row column justify-between align-center ">
+            <img src="{{ article.image }}" alt="Image" class="resp"/>
         </div>
 
 
@@ -53,7 +53,7 @@
         {#Avec path, j'indique le name de la route à emprunter, et la valeur de la wild card de la route #}
         {# l'id qui a pour valeur article.id #}
         <h1>
-            <div class="row column justify-between align-center">
+            <div class="row column justify-between align-center mt-20 ">
                 <a href="{{ path('article_show',{'id':article.id}) }}"> {{ article.title }}  </a>
             </div>
         </h1>
@@ -71,17 +71,17 @@
 
 
 
-        <h3 class="row column justify-between align-center">
+        <h3 class="row justify-around align-center">
         <span class="row justifify-content align-center button">
             {# Un bouton cliquable pour supprimer mon article  #}
             <a href="{{ path('admin_article_list',{'id':article.id}) }}"> Modifier l'article </a>
         </span>
-        </h3>
 
-        <h3 class="row column justify-between align-center">
+
+
         <span class="row justifify-content align-center button">
             <a href="{{ path('admin_article_list',{'id':article.id}) }}"> Supprimer l'article  </a>
-        </span></br>
+        </span>
         </h3>
 
 

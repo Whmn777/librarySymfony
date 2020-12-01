@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Les Catégories{% endblock %}
+
+
+
+{% block main %}
+
+    <main>
+
+
+        <section class="block">
+            {# j'utilise la fonction Twig form pour afficher mon formulaire  #}
+            {#  avec en parametre la variable de formulaire 'formView' #}
+
+            <div><h1>Créer une nouvelle catégorie</h1></div>
+            <br />
+            <div>{{ form(formView) }}</div>
+
+        </section>
+
+    </main>
+
+{% endblock main %}

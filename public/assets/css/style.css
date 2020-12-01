@@ -1,9 +1,10 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: content-box;
+    box-sizing: border-box;
     width: 100%;
     font-family: 'Raleway', sans-serif;
+
 }
 .resp {
     width: 70%;
@@ -46,6 +47,40 @@
     border-radius: 15px;
     margin-bottom: 15px;
     text-align: center;
+}
+
+header {
+    height: 80vh;
+    background-image: url('{{asset("assets/img/nouvelle-caledonie-lifou (1).png" ~ image.png)}}');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+li {
+    list-style-type: none;
+    border-radius: 20px;
+
+}
+
+li a {
+    list-style-type: none;
+    color: white;
+    font-size: 1.5em;
+}
+
+li a:hover {
+    color: white;
+    text-decoration: none;
+    font-size: 3em;
+}
+
+header li {
+    transition: background-color 0.5s ease
+}
+
+header li:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 
