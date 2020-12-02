@@ -51,7 +51,7 @@
 
 header {
     height: 80vh;
-    background-image: url('{{asset("assets/img/nouvelle-caledonie-lifou (1).png" ~ image.png)}}');
+    background-image: url('{{asset("assets/img/nouvelle-caledonie-lifou (1).png" ~.png)}}');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -71,7 +71,7 @@ li a {
 li a:hover {
     color: white;
     text-decoration: none;
-    font-size: 3em;
+    font-size: 2em;
 }
 
 header li {

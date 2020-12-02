@@ -55,13 +55,6 @@
                     {{ form_errors(formView.content) }}
                 </div >
 
-                {#// J'affiche le label et l'input pour l'image' : #}
-                <div class="form-group">
-                    {{ form_label (formView.image)}}
-                    {{ form_widget (formView.image) }}
-                    {{ form_errors(formView.content) }}
-                </div >
-
                 {# J'affiche le label et l'input pour le publicationDate : #}
                 <div class="form-group">
                     {{ form_label (formView.publicationDate)}}
@@ -82,16 +75,24 @@
                     {{ form_widget (formView.isPublished) }}
                 </div>
 
-                {# J'affiche  le bouton : #}
-                <div class="form-group">
-                    {{ form_widget(formView.valider) }}
+                {# J'affiche le label et l'input pour l'upload d'image : #}
+                <div>
+                    {{ form_label(formView.imageFileName) }}
+                    {{ form_widget(formView.imageFileName) }}
+                    {{ form_errors(formView.imageFileName) }}
                 </div>
+
 
                 {# J'affiche le label et l'input du volet déroulant affichant chaque catégorie: #}
                 <div class="row form-group">
                     {{ form_label (formView.category)}}
                     {{ form_widget (formView.category) }}
                     {{ form_errors(formView.category) }}
+                </div>
+
+                {# J'affiche  le bouton : #}
+                <div class="form-group">
+                    {{ form_widget(formView.valider) }}
                 </div>
 
 

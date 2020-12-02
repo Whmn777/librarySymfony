@@ -17,7 +17,8 @@
 
 <body>
 
-<header class="d-flex flex-column justify-content-between  text-center container-fluid back p-3 mb-2 bg-primary text-white">
+<header class="d-flex flex-column justify-content-between  text-center container-fluid back p-3 mb-2 bg-primary text-white"
+        style = "background-image: url('{{asset("assets/img/nouvelle-caledonie-lifou (1).png") }}')">
     <nav class="row mx-0 w-100 justify-content-between align-items-center">
         <div class="order-2 order-md-1 order-lg-1 col-lg-2 col-4 p-3 mb-2 bg-light text-dark"><img src='{{asset("assets/img/j-aime-lifou.png") }}' alt="" class="img-fluid"></div>
         <div class="col-lg-8 order-lg-2 d-none d-lg-block">
@@ -38,12 +39,16 @@
         </div>
     </nav>
 
-    <article class="row py-5 py-lg-2 justify-content-lg-end justify-content-center">
+    <article class="row py-5 py-lg-2 justify-content-lg-end justify-content-center" >
+
         <div class="col-lg-6">
             <h1 class="text-lg-right text-center text-warning">Les trésors de Lifou</h1>
-            <p class="text-light text-lg-right d-none d-lg-block">Venez découvrir les beautés des îles Loyauté. Lifou en est la plus grande
-            parmi Maré, Tiga, et Ouvéa. Elle compte environ 15000 habitants, et on y vit du tourisme, des services, de l'agriculture et de
-            la pêche.</p>
+            <p class="text-light text-lg-right d-none d-lg-block">
+                    Venez découvrir les beautés des îles Loyauté. Lifou
+                    en est la plus grande parmi Maré, Tiga, et Ouvéa. Elle compte environ 15000 habitants, et on y vit
+                    de nos traditions, de l'agriculture, de la pêche, du tourisme et des services.
+            </p>
+
             <button class="mt-3 d-block d-lg-none mx-auto bg-dark border border-light rounded-pill text-light text-center py-2 px-3">Voir l'article</button>
         </div>
     </article>
@@ -54,13 +59,13 @@
             <main>
                 <section class="container my-5">
                     <article class="row align-items-center">
-                         <div class="col-md-"><img src='{{asset("assets/img/nouvelle-caledonie-lifou (1).png") }}' alt="" class="img-fluid"></div>
                           <div class="col-md-12">
-                            {% block main %} {% endblock main %}</main>
+
                          </div>
                     </article>
                 </section>
-
+                    {% block main %} {% endblock main %}
+            </main>
 
 </body>
 
@@ -68,7 +73,7 @@
 <footer class="container-fluid bg-dark py-3">
         <nav class="container">
             <div class="row justify-content-lg-between align-items-center">
-                <div class="col-lg-2 d-none d-lg-block order-lg-1"><img src="imgWWF/WWF-logo.png" alt="" class="img-fluid"></div>
+                <div class="col-lg-2 d-none d-lg-block order-lg-1"><img src='{{asset("assets/img/j-aime-lifou.png") }}' alt="" class="img-fluid"></div>
                 <ul class="text-center text-md-left col-lg-3 col-md-4 order-lg-2 order-2 order-md-1 ">
                     <li>
                         <a href="" class="text-light">Mentions légales</a>
@@ -83,9 +88,9 @@
                 <button class="my-3 my-md-0 col-6 offset-3 offset-md-0 col-lg-2 col-md-4 order-1 order-md-2 order-lg-3 bg-primary border border-light rounded-pill text-light text-center py-2 px-3">Devenir membre</button>
                 <div class="col-lg-3 col-md-4 order-3 col-md-4 order-lg-4 order-md-3">
                     <ul class="row justify-content-lg-between justify-content-around pl-0">
-                        <li class="col-3"><img src="imgWWF/facebook.png " alt="" class="img-fluid"></li>
-                        <li class="col-3"><img src="imgWWF/youtube.png " alt="" class="img-fluid"></li>
-                        <li class="col-3"><img src="imgWWF/twitter.png " alt="" class="img-fluid"></li>
+                        <li class="col-3"><img src=" {{asset('assets/img/facebook.png') }} " alt="" class="img-fluid"></li>
+                        <li class="col-3"><img src="{{asset('assets/img/youtube.png') }} " alt="" class="img-fluid"></li>
+                        <li class="col-3"><img src="{{asset('assets/img/twitter.png') }} " alt="" class="img-fluid"></li>
                     </ul>
                 </div>
             </div>

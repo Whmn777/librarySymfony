@@ -61,13 +61,6 @@ class Article
      */
     private $content;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     *
-     * @Assert\Url
-     *
-     */
-    private $image;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -92,6 +85,30 @@ class Article
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $isPublished;
+
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $imageFileName;
+
+    /**
+     * @return mixed
+     */
+    public function getImageFileName()
+    {
+        return $this->imageFileName;
+    }
+
+    /**
+     * @param mixed $imageFileName
+     */
+    public function setImageFileName($imageFileName): void
+    {
+        $this->imageFileName = $imageFileName;
+    }
+
+
 
 
     //JOINTURE entre deux tables de la BDD avec Symfony :
@@ -167,18 +184,6 @@ class Article
     public function setContent(?string $content): self
     {
         $this->content = $content;
-
-        return $this;
-    }
-
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(?string $image): self
-    {
-        $this->image = $image;
 
         return $this;
     }

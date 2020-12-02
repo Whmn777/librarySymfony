@@ -8,6 +8,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,7 +20,6 @@ class ArticleType extends AbstractType
         $builder
             ->add('title')
             ->add('content')
-            ->add('image')
             ->add('publicationDate', DateType::class, [
                 'widget' => 'single_text'
             ])
@@ -38,7 +38,12 @@ class ArticleType extends AbstractType
                 'class'=> Category::class,
                 'choice_label' =>'title'
                 ])
+            //Je rajoute un nouvel input pour mon upload d'image
 
+            ->add('imageFileName', FileType::class, [
+                'required' => false, //Je le force à être 'required'.
+                'mapped' => false    // Je l'oblige à NE PAS gérer l'upload de l'image directement dans la BDD.
+            ])
             ->add('isPublished')
             ->add('valider',SubmitType::class)
         ;

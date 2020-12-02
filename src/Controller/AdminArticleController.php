@@ -11,6 +11,8 @@ use App\Repository\ArticleRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Article;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 
 class AdminArticleController extends AbstractController
@@ -64,7 +66,7 @@ class AdminArticleController extends AbstractController
     // va me permettre de réaliser des requêtes INSERT, UPDATE et DELETE dans ma BDD. Je rajoute la variable
     // $entityManager
 
-    public function insertStaticArticle(EntityManagerInterface $entityManager )
+    public function insertStaticArticle(EntityManagerInterface $entityManager)
     {
 
         // Dans la variable $article, j'instancie un nouvel objet newArticle de la classe entité Article.
@@ -140,7 +142,7 @@ class AdminArticleController extends AbstractController
     // à la variable $entityManager qui va contenir mes modifications.
 
 
-    public function updateStaticArticle($id,ArticleRepository $articleRepository, EntityManagerInterface $entityManager)
+    public function updateStaticArticle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager)
     {
         // Je créee une instance $articleRepository pour récupérer l'article à modifier de ma BDD
         // grâce à la méthode find() de la class ArticleRepository.
@@ -192,7 +194,6 @@ class AdminArticleController extends AbstractController
         // sur mon navigateur, ainsi que le message 'succès' de modification de l'article.
 
         return $this->render("admin/articles.html.twig");
-
 
 
         // Ces deux méthodes d'insertion et de modification statiques ne sont jamais voir rarement utilisées,
@@ -251,7 +252,7 @@ class AdminArticleController extends AbstractController
     // -et la classe EntityManagerInterface pour pouvoir gérer mes données avec la BDD,
     // comme envoyer et enregistrer mes nouvelles données.
 
-    public function insertArticle( Request $request, EntityManagerInterface $entityManager)
+    public function insertArticle(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger)
     {
 
         // $article est une nouvelle instance de mon entité Article qui me permet de créer dans ma BDD un nouvel
@@ -259,6 +260,23 @@ class AdminArticleController extends AbstractController
 
 
         $article = new Article();
+
+        //Puis, je créee d'abord un gabarit de mon formulaire : j'utilise des lignes de commande sur le Terminal
+        //Je m'assure que je suis bien sur mon dossier de projet SF, et je saisis les commandes suivantes:
+
+        //1. bin/console make: form
+        // A partir de ma console je crée un dossier Form dans le Controller de mon dossier projet :
+        //Cela me permet de créer la class form qui va me permettre de générer mon gabarit sur SF.
+        //
+        //Je nomme donc ma class en utilisant le nom de mon entité (où je dois modifier les propriétés) suivi de Type
+        //Je saisi donc sur mon Terminal:
+        //2. EntityNameType (Je crée dans Form, un fichier que je nomme "EntityName" suivi de "Type". Ici "Article".
+        //
+        //Je renseigne dans mon Terminal le nom de mon Entité qui sera utiliser par SF pour
+        // générer depuis mon Controller, mon gabarit. Les propiétés de mon Entité seront scannées et vont générer
+        //les champs à renseigner de mon formulaire.
+        //
+        //3.Je saisis donc mon Entity sur mon Terminal : Ici "Article".
 
         // Avec la méthode createForm de la class AbstractController, j'instancie un nouvel objet Form.
         // Je met deux paramètres dans cette méthode:
@@ -281,134 +299,168 @@ class AdminArticleController extends AbstractController
 
         // Si le formulaire est Soumis et Validé :
 
-        if ($form->isSubmitted() && $form->isValid())
-        {
-            // alors je l'enregistre en BDD :
+        if ($form->isSubmitted() && $form->isValid()) {
+            // 1. Je récupère le nom de mon image de mon input de formulaire, et les datas du fichier.
+            $imageFile = $form->get('imageFileName')->getData();
 
-            $entityManager->persist($article);
-            $entityManager->flush();
+            // 2. Si le nom du fichier avec ou sans contenu est récupérer :
 
-            // Puis j'affiche un message de succès de création d'article :
+            if ($imageFile) {
 
-            $this->addFlash(
-                "success",
-                "Bravo : Vous avez bien créer un nouvel article !!!");
+                // 2A] je ne récupère d'abord que le nom du fichier image :
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+
+                // 2B] Avec la méthode slug de la class Slugger, je sors tous les caractères spéciaux de mon nom de fichier :
+                $safeFilename = $slugger->slug($originalFilename);
+
+                // 2C] Je lui attribue un nom unique avec la méthode uniqid(), et lui concatène son extension :
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
+
+
+                // 2D] Je déplace l'image dans un dossier que j'ai spécifié en paramètre
+                // (dans le fichier config/services.yaml)
+                $imageFile->move(
+                    $this->getParameter('images_directory'),
+                    $newFilename
+                );
+
+                // 3. J'enregistre ensuite ce nouveau 'slug' dans mon entité :
+                $article->setImageFileName($newFilename);
+
+                // Je l'enregistre en BDD :
+
+                $entityManager->persist($article);
+                $entityManager->flush();
+
+                // Puis j'affiche un message de succès de création d'article :
+
+                $this->addFlash(
+                    "success",
+                    "Bravo : Vous avez bien créer un nouvel article !!!");
+            }
+
+
+            return $this->redirectToRoute('admin_article_list');
+
         }
+            // Grâce à la méthode creatView de la classe AbstractController, je convertie ma variable $form, en un format
+            // lisible par twig.
+            // Je nomme donc cette prévisualisation de mon gabbarit $formView
 
-        // Grâce à la méthode creatView de la classe AbstractController, je convertie ma variable $form, en un format
-        // lisible par twig.
-        // Je nomme donc cette prévisualisation de mon gabbarit $formView
+            $formView = $form->createView();
 
-        $formView = $form->createView();
+            // Je retourne ma fonction insertArticle, avec la méthode render, afin de pouvoir l'afficher
+            // sur mon navigateur, à la page des articles, ainsi que le message 'succès' de création d'article.
+            // Pour cela je passe en paramètres de ma méthode render :
+            // - mon fichier twig correspondant,
+            // - un tableau ayant pour index la variable 'formView' sur twig, qui correspond à la valeur $formView dans php.
 
-        // Je retourne ma fonction insertArticle, avec la méthode render, afin de pouvoir l'afficher
-        // sur mon navigateur, à la page des articles, ainsi que le message 'succès' de création d'article.
-        // Pour cela je passe en paramètres de ma méthode render :
-        // - mon fichier twig correspondant,
-        // - un tableau ayant pour index la variable 'formView' sur twig, qui correspond à la valeur $formView dans php.
+            return $this->render('admin/form.html.twig', [
+                'formView' => $formView
+            ]);
 
-        return $this->render('admin/form.html.twig', [
-            'formView' => $formView
-        ]);
     }
 
 // B] Pour Modifier des données dans la BDD depuis un formulaire avec SF :
 
-    /**
-     * Création de la route pour modifier un article depuis la BDD, pour cela il nous faut une wildcard {id}:
-     *
-     * @Route("/admin/article/update/{id}", name="admin_article_update")
-     */
+        /**
+         * Création de la route pour modifier un article depuis la BDD, pour cela il nous faut une wildcard {id}:
+         *
+         * @Route("/admin/article/update/{id}", name="admin_article_update")
+         */
 
-    // Je créé une méthode publique "updateArticle" pour modifier:
-    // -  un article spécifique, grâce  à la class ArticleRepository, et à son 'id'.
-    // - enregistrer mes modifications grâce à la class EntityManagerInterface et
-    // à la variable $entityManager qui va contenir mes modifications.
+        // Je créé une méthode publique "updateArticle" pour modifier:
+        // -  un article spécifique, grâce  à la class ArticleRepository, et à son 'id'.
+        // - enregistrer mes modifications grâce à la class EntityManagerInterface et
+        // à la variable $entityManager qui va contenir mes modifications.
 
-    public function updateArticle
-    (
-        $id,
-        ArticleRepository $articleRepository,
-        Request $request,
-        EntityManagerInterface $entityManager
-    )
+
+        public function updateArticle
+        (
+            $id,
+            ArticleRepository $articleRepository,
+            Request $request,
+            EntityManagerInterface $entityManager
+        )
 
         {
-        $article = $articleRepository->find($id);
+            $article = $articleRepository->find($id);
 
-        if (is_null($article)) {
-            return $this->redirectToRoute('admin_article_list');
+            if (is_null($article)) {
+                return $this->redirectToRoute('admin_article_list');
+            }
+
+            $form = $this->createForm(ArticleType::class, $article);
+
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager->persist($article);
+                $entityManager->flush();
+
+                $this->addFlash(
+                    "success",
+                    "L'article a été modifié !"
+                );
+
+                return $this->redirectToRoute('admin_article_list');
+            }
+
+            $formView = $form->createView();
+
+            return $this->render('admin/articles.html.twig', [
+                'formView' => $formView
+            ]);
         }
 
-        $form = $this->createForm(ArticleType::class, $article);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid())
-        {
-            $entityManager->persist($article);
-            $entityManager->flush();
-
-            $this->addFlash(
-                "success",
-                "L'article a été modifié !"
-            );
-
-            return $this->redirectToRoute('admin_article_list');
-        }
-
-        $formView = $form->createView();
-
-        return $this->render('admin/articles.html.twig', [
-            'formView' => $formView
-        ]);
-    }
 
 
 // C] Pour Supprimer des données dans la BDD depuis un formulaire avec SF :
 
-    /**
-     * Création de la route pour supprimer un article depuis la BDD, pour cela il nous faut une wildcard {id}:
-     *
-     * @Route("/admin/article/delete/{id}", name="admin_article_delete")
-     */
+        /**
+         * Création de la route pour supprimer un article depuis la BDD, pour cela il nous faut une wildcard {id}:
+         *
+         * @Route("/admin/article/delete/{id}", name="admin_article_delete")
+         */
 
-    public function deleteArticle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager)
-    {
+        public
+        function deleteArticle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager)
+        {
 
-        //Je récupère grâce à la valeur $id de la wildcard, et grâce à ma class ArticleRepository l'article
-        //que je veux supprimer. J'affecte cette $article à la valeur de $articleRepository, par la méthode find()
-        //de la class ArticleRepository.
+            //Je récupère grâce à la valeur $id de la wildcard, et grâce à ma class ArticleRepository l'article
+            //que je veux supprimer. J'affecte cette $article à la valeur de $articleRepository, par la méthode find()
+            //de la class ArticleRepository.
 
-        $article = $articleRepository->find($id);
+            $article = $articleRepository->find($id);
 
-        //Si la valeur de $article n'est pas nulle :
-        //avec la class EntityManager, j'instancie la variable $entityManager grâce à la méthode remove:
-        //Cette méthode récupère la valeur de mon article et la supprime.
-        //Puis avec la méthode flush, ma valeur supprimée donc vide est enregistrée.
+            //Si la valeur de $article n'est pas nulle :
+            //avec la class EntityManager, j'instancie la variable $entityManager grâce à la méthode remove:
+            //Cette méthode récupère la valeur de mon article et la supprime.
+            //Puis avec la méthode flush, ma valeur supprimée donc vide est enregistrée.
 
-        if (!is_null($article)) {
-            $entityManager->remove($article);
-            $entityManager->flush();
+            if (!is_null($article)) {
+                $entityManager->remove($article);
+                $entityManager->flush();
 
-            // J'utilise la méthode addFlash native de Symfony (de la class AbstractController)
-            // pour afficher sur ma page de liste d'articles
-            //un message flash de type "succès"
-            // et signaler à l'utilisateur qu'il a bien supprimé l'article.
+                // J'utilise la méthode addFlash native de Symfony (de la class AbstractController)
+                // pour afficher sur ma page de liste d'articles
+                //un message flash de type "succès"
+                // et signaler à l'utilisateur qu'il a bien supprimé l'article.
 
-            $this->addFlash(
-                "success",
-                "Bravo : Vous avez bien supprimé cet article !!!"
-            );
+                $this->addFlash(
+                    "success",
+                    "Bravo : Vous avez bien supprimé cet article !!!"
+                );
+            }
+
+            // J'utilise la méthode redirectToRoute de la class AbstractController
+            //pour rediriger l'utilisateur vers la page : liste des articles,
+            // une fois la suppression faite, avec affichage du message de suppression effectué.
+
+            return $this->redirectToRoute("admin_article_list");
+
         }
 
-        // J'utilise la méthode redirectToRoute de la class AbstractController
-        //pour rediriger l'utilisateur vers la page : liste des articles,
-        // une fois la suppression faite, avec affichage du message de suppression effectué.
-
-        return $this->redirectToRoute("admin_article_list");
-
-    }
 
 
 }
